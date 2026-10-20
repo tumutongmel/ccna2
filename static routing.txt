@@ -1,0 +1,14 @@
+Static routing
+
+[Destination]	[MASK]	[NEXT-HOP/EXIT INT]
+
+@R1
+
+conf t
+ip route 10.1.1.8 255.255.255.252 10.1.1.2
+end
+ping 10.1.1.10
+
+conf t
+ip route 10.1.1.8 255.255.255.252 10.1.1.6
+end

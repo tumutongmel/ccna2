@@ -1,0 +1,28 @@
+task 4
+
+195 -8b
+4b
+11b
+10b
+12b
+2b
+9b
+10b
+4b
+13b
+
+800 user
+10.213.192.0 /19
+
+C: 800 = 10bits
+S: /32 - 10bits = /22 (3rd, 4i)
+ipasok si 4 sa 3rd
+
+Network : 10.213.196.0 /22
+First Valid IP (+1)= 10.213.196.1
+Last IP             
+
+
+
+
+

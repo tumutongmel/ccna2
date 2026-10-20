@@ -1,0 +1,194 @@
+Core Taas
+
+conf t
+ip routing
+int fa0/9
+no sw
+no shut
+ip add 10.182.45.60 255.255.255.224
+end
+
+
+Core Baba
+conf t
+ip routing
+int fa0/9
+no sw
+no shut
+ip add 10.182.45.65 255.255.255.224
+end
+
+
+172.28.228.144/18 (3rd, 64i) 64,128,192,256
+172.28.192.0/18
+172.28.192.1 
+
+
+172.28.228.144/21 (3rd, 8i)
+
+
+172.28.228.144/23 (3rd, 2i)
+
+172.28.228.144/25 (4th, 128i)
+
+
+
+
+
+10.0.0.0/16
+87 user = 7bits - 32 = /25 (4th, 128i)
+
+
+10.0.0.0/25
+10.0.0.128/25
+10.0.0.129/25
+
+Not
+
+27users = 5bits - 32 = /27 (4th, 32i)
+10.0.0.128/27
+
+I= 10.0.0.128/27
+
+Not 10.0.0.160/?
+
+
+
+12 users 4bits - 32 = /28 (4th, 16i)
+10.0.0.160
+
+10.0.0.160/28
+10.0.0.161/28
+10.0.0.176/28
+10.0.0.176/?
+
+
+
+
+config t
+vlan 22
+ name Admin
+ exit
+Int vlan 22
+ no shut
+ ip add 10.31.0.129 255.255.255.224
+ip ospf 1 area 0
+ip dhcp excluded-add 10.31.0.129 10.31.0.139
+ip dhcp pool ADMIN.com
+ network 10.31.0.128 255.255.255.224
+ default-router 10.31.0.129
+ domain-name ADMIN.com
+ dns-server 10.31.1.10
+ option 150 ip 10.31.100.8
+ Int Fa 0/5
+  swi Voice vlan 22
+  do sh ip dhcp binding
+
+
+
+189 user
+192.168.128.0/18
+
+
+C: 8bits
+S: /32 - 8bits /24 (3rd, 1i)
+
+I:192.168.128.0/24
+
+Net	:	192.168.129.0/24
+FValid	:	192.168.129.1
+LValid	:	192.168.129.254
+Last/BR	: 	192.168.129.255
+NOT	:	192.168.130.0/?
+
+For DHCP server
+
+!@C1
+config t
+vlan 40
+ name Accenture
+ exit
+Int vlan 40
+ no shut
+ ip add 192.168.129.1 255.255.255.0
+ip ospf 1 area 0
+ip dhcp excluded-add 192.168.129.1 192.168.129.20
+ip dhcp pool Accenture
+ network 192.168.129.0 255.255.255.0
+ default-router 192.168.129.1
+ domain-name Accenture
+ dns-server 10.31.1.10
+end
+
+
+!P1
+Conf t
+int e0/0
+no shut
+ip address dhcp
+end
+
+
+
+
+!A1
+Conf t
+int e0/0
+switchport mode access
+switchport access vlan 40
+end
+
+
+
+2800 user Concentrix.com
+172.16.32.0/19
+
+C: 12bits
+S: /32 - 12bits /20 (3rd, 16i)
+
+I:172.16.48.0/20
+
+Net	:	172.16.48.0/20
+FValid	:	192.168.48.1
+LValid	:	192.168.63.254
+Last/BR	: 	192.168.63.255
+NOT	:	192.168.64.0/?
+
+
+!@C2
+config t
+vlan 50
+ name Concentrix
+ exit
+Int vlan 50
+ no shut
+ ip add 192.168.48.1 255.255.240.0
+ip ospf 1 area 0
+ip dhcp excluded-add 192.168.48.1 192.168.129.100
+ip dhcp pool Accenture
+ network 192.168.48.0 255.255.240.0
+ default-router 192.168.48.1
+ domain-name Accenture
+ dns-server 10.31.1.10
+end
+
+!P2
+Conf t
+int e1/0
+no shut
+ip address dhcp
+end
+
+!A2
+Conf t
+int e1/0
+switchport mode access
+switchport access vlan 50
+end
+
+
+
+
+
+
+
