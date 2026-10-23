@@ -1,0 +1,181 @@
+!@COREBABA,CORETAAS
+
+
+
+!@CMD
+
+cd desktop
+cd Reymel
+git clone https://github.com/4rthurcyber08/rivan_day4
+
+netstat -n -p tpc
+
+conf t
+monitor session 1 source int fa0/3,fa0/5,fa0/7
+monitor session 1 dest int fa0/1,fa0/9
+end
+
+
+www.neu.edu.ph
+www.cia.gov
+www.sti.edu.ph
+www.fbi.gov
+www.dpwh.gov.ph
+
+
+telnet 192.168.102.11
+
+pornhub.com 		66.254.114.41
+redtube.com 		66.254.114.238
+faketaxi.com 		66.254.114.234
+ping bangbros.com 	66.254.114.234
+pinayflix.com 		104.21.55.88
+sulasok.tv 		172.67.159.23
+ping iyottube.com	208.77.20.35
+
+conf t
+ip access-list standard NOPORN
+deny 66.254.114.0 0.0.0.255
+deny 104.21.0.0 0.0.255.255
+deny host 208.77.20.35
+permit any
+
+int g1
+ip access-group NOPORN in
+end
+
+
+www.dlsu.edu.ph 	172.66.161.211
+www.ccp.edu.ph 		50.6.160.47
+www.feu.edu.ph		184.168.125.216
+www.ue.edu.ph		155.137.92.102
+
+
+conf t
+no ip access-list standard NO-SCHOOL
+ip access-list standard NO-SCHOOL
+deny host 172.66.161.211 
+deny host 50.6.160.47
+deny host 184.168.125.216
+deny host 155.137.92.102
+
+permit any
+
+int g1
+ip access-group NO-SCHOOL in
+end
+
+
+conf t
+ no ip access-list extended FWP4
+ ip access-list extended FWP4
+ permit tcp Any host www.bet100.com eq 80 log
+ permit tcp Any host www.bet100.com eq 443 log
+ permit icmp Any host www.bet100.com log
+ permit tcp Any host www.bet100.com eq 22 log
+ permit tcp Any host www.bet100.com eq 53 log
+ Int gi 1
+  ip access-group FWP4 in
+  end
+
+
+
+!@UTM-PH
+conf t
+ no ip access-list extended FWP5
+ ip access-list extended FWP5
+permit tcp Any host www.bet100.com eq 23 log
+permit tcp Any host www.bet100.com eq 53 log
+permit tcp Any host www.bet100.com eq 3306 log
+permit tcp Any host www.bet100.com eq 21 log
+permit icmp Any host www.bet100.com log
+
+  exit
+ int gi 1
+  ip access-group FWP5 in
+  end
+
+
+
+
+conf t
+ no ip access-list extended FWP5
+ ip access-list extended FWP5
+permit tcp Any host www.bet100.com eq 2000 log
+permit tcp Any host www.bet100.com eq 5060 log
+permit tcp Any host www.bet100.com eq 143 log
+permit tcp Any host www.bet100.com eq 25 log
+permit tcp Any host www.bet100.com eq 110 log
+permit tcp Any host www.bet100.com eq 21 log
+permit tcp Any host www.bet100.com eq 69 log
+permit tcp Any host www.bet100.com eq 123 log
+Int gi 1
+  ip access-group FWP6 in
+  end
+
+
+
+
+!@BLDG-PH
+sudo su
+hostname BLDG-PH
+ifconfig eth0 10.11.11.101 netmask 255.255.255.224 up
+route add default gw 10.11.11.113
+ping 10.11.11.113
+
+
+!@BLDG-JP-1
+sudo su
+hostname BLDG-JP-1
+ifconfig eth0 10.21.21.211 netmask 255.255.255.240 up
+route add default gw 10.21.21.213
+ping 10.21.21.213
+
+!@UTM-PH
+
+conf t
+hostname UTM-PH-SECURE
+ip domain name ccna.key
+crypto key generate rsa modulus 2048 label key
+!
+ip ssh version 2
+line vty 0 14
+transport input all
+login local
+username Mel privilege 15 secret pass
+end
+
+
+
+@cmd
+cd desktop
+cd Reymel
+git clone https://github.com/4rthurcyber08/sshautomate
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
